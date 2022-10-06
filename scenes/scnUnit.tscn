@@ -17,10 +17,9 @@
 [ext_resource path="res://assets/Villagerwalk_up/Villagerwalk061.bmp" type="Texture" id=15]
 [ext_resource path="res://assets/Villagerwalk_up/Villagerwalk063.bmp" type="Texture" id=16]
 [ext_resource path="res://assets/Villagerwalk_up/Villagerwalk064.bmp" type="Texture" id=17]
-[ext_resource path="res://materials/matTeam1.tres" type="Material" id=18]
 
 [sub_resource type="CylinderMesh" id=1]
-bottom_radius = 3.2
+top_radius = 0.5
 height = 0.001
 
 [sub_resource type="Shader" id=2]
@@ -35,7 +34,10 @@ void fragment (){
 shader = SubResource( 2 )
 
 [sub_resource type="CubeMesh" id=4]
-material = ExtResource( 18 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 0.194615, 0.219104, 0.211429 )
 
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
@@ -57,19 +59,28 @@ material/0 = SubResource( 3 )
 [node name="olLight" type="OmniLight" parent="miSelectionRing"]
 transform = Transform( 0.769231, 0, 0, 0, 1, 0, 0, 0, 0.769231, -0.154542, 0, 0 )
 light_color = Color( 0.909804, 1, 0.686275, 1 )
+light_energy = 0.413
+light_indirect_energy = 0.706
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 1.07212, 0, 0, 0, -4.42238e-08, -2.29646, 0, 1.01172, -1.00381e-07, 0, 2.03157, 4.50912e-08 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -2, 0, 1, -8.74228e-08, 0, 1.10913, 4.77012e-09 )
 visible = false
 layers = 2
 mesh = SubResource( 4 )
-material/0 = ExtResource( 18 )
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance/StaticBody"]
+transform = Transform( 3, 0, 0, 0, 3, 7.10543e-14, 0, -2.13163e-14, 2, 0, 3.55271e-15, 0.110718 )
+shape = SubResource( 6 )
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
-transform = Transform( 9, 0, 0, 0, 9, 0, 0, 0, 1, -0.0236579, 1.37721, 0 )
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 1, -0.0236579, 0.980877, 0 )
 layers = 2
 generate_lightmap = false
 billboard = 1
 frames = SubResource( 5 )
-frame = 11
+frame = 4
 playing = true

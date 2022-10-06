@@ -17,8 +17,8 @@ var auxCounter
 
 export var team = 0
 var team_colors = {
-	0: preload("res://materials/matTeam1.tres"),
-	1: preload("res://materials/matTeam2.tres")
+	0: preload("res://assets/materials/matTeam1.tres"),
+	1: preload("res://assets/materials/matTeam2.tres")
 }
 
 #_____________________________________________________________________________________FRAME BY FRAME
@@ -47,7 +47,6 @@ func move_to(target_pos, estatus ,counter):#gets mouse target
 	
 func select():
 	$miSelectionRing.show()
- 
 func deselect():
 	$miSelectionRing.hide()	
 
