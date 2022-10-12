@@ -39,11 +39,12 @@ func get_target_move_pos():#this gives the que manager the updathed position of 
 
 func move_to(target_pos, estatus ,counter):#gets mouse target
 	target = target_pos
-	unitCueStatus = estatus
+	unitCueStatus = true
 	#target = get_tree().get_nodes_in_group("grpTarget")[0]
 	cuedOrders.insert(counter, counter)
 	auxCounter = counter
 	#print(counter)
+
 	
 func select():
 	$miSelectionRing.show()
@@ -98,7 +99,7 @@ func can_move_in_straight_line():
 		unitCueStatus = false
 		return false
 	
-	if pos.distance_squared_to(target_pos) > min_dist_to_check_los*min_dist_to_check_los:#the target isnt near the check tresh hold yet
+	if pos.distance_squared_to(target_pos) > min_dist_to_check_los*min_dist_to_check_los:#the target isnt near the check treshhold yet
 		return false 
 
 	var right : Vector3 = target_pos - pos

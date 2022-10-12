@@ -130,4 +130,4 @@ quality/driver/fallback_to_gles2=true
 threads/thread_model=2
 quality/filters/anisotropic_filter_level=1
 quality/filters/use_nearest_mipmap_filter=true
-environment/default_environment="res://default_env.tres"
+environment/default_environment="res://assets/default_env.tres"

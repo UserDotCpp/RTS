@@ -7,8 +7,7 @@ const ray_length = 1000
 
 onready var cam = $cmCam
 onready var selector = get_parent().get_node("spBuilding_selector/msSelector")
-onready var ray = get_parent().get_node("spBuilding_selector/RayCast")
-
+onready var map = get_parent().get_node("nvNavigationCore/gm1x1")
 
 var team = 0
 var selected_units = []
@@ -20,6 +19,8 @@ var viewport_minimum = 200
 var m_pos
 
 var counter = 1
+var point
+var can_build = true
 
 
 onready var selection_box = $cSelectionBox
@@ -29,10 +30,15 @@ var start_sel_pos = Vector2()
 #________________________________________________________________________________________________________IMPUTS/FRAME BY FRAME
 #this runs heach frame
 func _process(delta):
-		m_pos = get_viewport().get_mouse_position()
-		calc_move( delta)
+	m_pos = get_viewport().get_mouse_position()
+	calc_move( delta)
 
-func _input(_event):
+
+
+export (Color , RGB) var yellow
+export (Color , RGB) var red
+
+func _input(event):
 	if Input.is_action_just_pressed("rightMouse"):
 		move_selected_units(m_pos)
 
@@ -57,20 +63,26 @@ func _input(_event):
 	if Input.is_action_just_released("shift"):#when is freed
 		counter = 0
 
-	if (Input.is_action_pressed("q")):
-		print(get_viewport().get_mouse_position())
-
 	if (Input.is_action_just_pressed("mouse_wheel_up")):
 		if cam.size > 5:
 			cam.size -= 1
 			_adjust_viewport_size()
-	
+
 	if (Input.is_action_just_pressed("mouse_wheel_down")):
 		if cam.size > 5:
 			cam.size += 1
 			_adjust_viewport_size()
 
-
+	if (Input.is_action_pressed("q")):
+		print(map.world_to_map(raycast_from_mouse(m_pos, 1).position))
+		selector.translation = Vector3(map.world_to_map(raycast_from_mouse(m_pos, 1).position).x,1,map.world_to_map(raycast_from_mouse(m_pos, 1).position).z)
+		if event is InputEventMouseButton:
+			var posi = event.position
+			if event.pressed:
+				var tile_pos= map.world_to_map(raycast_from_mouse(posi, 1).position)
+				print(tile_pos.x," ",tile_pos.y," ",tile_pos.z)
+				map.set_cell_item(tile_pos.x,tile_pos.y,tile_pos.z,2,0)
+	
 #________________________________________________________________________________________________________BOX MANAGMENT
 func select_units(fake_m_pos):
 	var new_selected_units = []
@@ -133,24 +145,24 @@ func calc_move(delta):
 func _adjust_viewport_size():
 	viewport_resolution.x = (cam.size / 100) * viewport_resolution_varience + viewport_minimum
 	viewport_resolution.y = (cam.size / 100) * viewport_resolution_varience + viewport_minimum
-	print(Vector2(viewport_resolution.x,viewport_resolution.y))
 	get_tree().get_root().set_size(Vector2(viewport_resolution.x,viewport_resolution.y))
 
 func raycast_from_mouse(fake_m_pos, collision_mask):
 	var ray_start = cam.project_ray_origin(fake_m_pos) #convert the mouce position in to a real possition
 	var ray_end = ray_start + cam.project_ray_normal(fake_m_pos) * ray_length #end position
 	var space_state = get_world().direct_space_state
-	print(space_state.intersect_ray(ray_start, ray_end, [], collision_mask).collider)
+	#print(space_state.intersect_ray(ray_start, ray_end, [], collision_mask).collider)
 	#checks if the target is the ground
-	if(space_state.intersect_ray(ray_start, ray_end, [], collision_mask).collider != get_parent().get_node("nvNavigationCore/nviNavMesh/miPlane/piso")):
-		return false
+	#if(space_state.intersect_ray(ray_start, ray_end, [], collision_mask).collider != get_parent().get_node("nvNavigationCore/nviNavMesh/miPlane/piso")):
+	#	return false
 	return space_state.intersect_ray(ray_start, ray_end, [], collision_mask)
 #________________________________________________________________________________________________________UNITS COMANDS
 func move_selected_units(fake_m_pos):
 	var result = raycast_from_mouse(fake_m_pos, 1)
+	print(result)
 	if result:
 		for unit in selected_units:
-			unit.move_to(result.position , true , counter)
+			unit.move_to(result.position , 1 , counter)
 			CueManager.queStatus = true
 
 #func move_all_units(m_pos):
