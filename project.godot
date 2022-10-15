@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="RTS"
-run/main_scene="res://scenes/scnWorldMap.tscn"
+run/main_scene="res://scenes/scnMenu.tscn"
 boot_splash/image="res://assets/art/place_holder_loading_screen.png"
 boot_splash/use_filter=false
 config/icon="res://assets/art/ico.png"
@@ -36,8 +36,8 @@ settings/fps/force_fps=60
 
 [display]
 
-window/size/width=256
-window/size/height=150
+window/size/width=840
+window/size/height=480
 window/size/test_width=840
 window/size/test_height=480
 window/vsync/use_vsync=false
@@ -109,6 +109,11 @@ mouse_wheel_down={
 q={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":81,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+escape={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 

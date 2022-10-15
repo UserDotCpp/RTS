@@ -1,0 +1,92 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://assets/Villagerwalk_up/Villagerwalk072.bmp" type="Texture" id=1]
+[ext_resource path="res://assets/Villagerwalk_up/Villagerwalk071.bmp" type="Texture" id=2]
+[ext_resource path="res://assets/Villagerwalk_up/Villagerwalk069.bmp" type="Texture" id=3]
+[ext_resource path="res://assets/Villagerwalk_up/Villagerwalk066.bmp" type="Texture" id=4]
+[ext_resource path="res://assets/Villagerwalk_up/Villagerwalk063.bmp" type="Texture" id=5]
+[ext_resource path="res://assets/Villagerwalk_up/Villagerwalk060.bmp" type="Texture" id=6]
+[ext_resource path="res://assets/Villagerwalk_up/Villagerwalk073.bmp" type="Texture" id=7]
+[ext_resource path="res://assets/Villagerwalk_up/Villagerwalk064.bmp" type="Texture" id=8]
+[ext_resource path="res://assets/Villagerwalk_up/Villagerwalk074.bmp" type="Texture" id=9]
+[ext_resource path="res://assets/Villagerwalk_up/Villagerwalk062.bmp" type="Texture" id=10]
+[ext_resource path="res://assets/Villagerwalk_up/Villagerwalk068.bmp" type="Texture" id=11]
+[ext_resource path="res://assets/Villagerwalk_up/Villagerwalk075.bmp" type="Texture" id=12]
+[ext_resource path="res://assets/Villagerwalk_up/Villagerwalk067.bmp" type="Texture" id=13]
+[ext_resource path="res://assets/Villagerwalk_up/Villagerwalk061.bmp" type="Texture" id=14]
+[ext_resource path="res://assets/Villagerwalk_up/Villagerwalk070.bmp" type="Texture" id=15]
+[ext_resource path="res://assets/Villagerwalk_up/Villagerwalk065.bmp" type="Texture" id=16]
+[ext_resource path="res://scripts/scptKBUnit.gd" type="Script" id=17]
+
+[sub_resource type="CylinderMesh" id=3]
+top_radius = 0.5
+height = 0.001
+
+[sub_resource type="Shader" id=2]
+code = "shader_type spatial;
+	
+void fragment (){
+	ALBEDO = vec3(0.1, 0.3 , 0.8);
+	ALPHA = 0.3;
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 2 )
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [ ExtResource( 6 ), ExtResource( 14 ), ExtResource( 10 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 16 ), ExtResource( 4 ), ExtResource( 13 ), ExtResource( 11 ), ExtResource( 3 ), ExtResource( 15 ), ExtResource( 2 ), ExtResource( 1 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "default",
+"speed": 24.0
+} ]
+
+[sub_resource type="BoxShape" id=8]
+extents = Vector3( 0.495883, 1, 0.51154 )
+
+[sub_resource type="CubeMesh" id=5]
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 0.194615, 0.219104, 0.211429 )
+
+[node name="Unit" type="KinematicBody" groups=["gUnit"]]
+script = ExtResource( 17 )
+
+[node name="miSelectionRing" type="MeshInstance" parent="."]
+transform = Transform( 1.3, 0, 0, 0, 1, 0, 0, 0, 1.3, 0, 0, 0 )
+visible = false
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="olLight" type="OmniLight" parent="miSelectionRing"]
+transform = Transform( 0.769231, 0, 0, 0, 1, 0, 0, 0, 0.769231, -0.154542, 0, 0 )
+light_color = Color( 0.909804, 1, 0.686275, 1 )
+light_energy = 0.413
+light_indirect_energy = 0.706
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 1, -0.0236579, 0.980877, 0 )
+layers = 2
+generate_lightmap = false
+billboard = 1
+frames = SubResource( 7 )
+playing = true
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09591, 0 )
+shape = SubResource( 8 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -2, 0, 1, -8.74228e-08, 0, 1.10913, 4.77012e-09 )
+visible = false
+layers = 2
+mesh = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance/StaticBody"]
+transform = Transform( 3, 0, 0, 0, 3, 7.10543e-14, 0, -2.13163e-14, 2, 0, 3.55271e-15, 0.110718 )
+shape = SubResource( 6 )
