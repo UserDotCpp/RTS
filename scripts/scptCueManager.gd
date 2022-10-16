@@ -20,11 +20,11 @@ func dequeue_path_request():
 	var nav: Navigation = calc_path_info.nav
 	var start_pos = unit.global_transform.origin
 	var end_pos = unit.get_target_move_pos()
-	var new_path = nav.get_simple_path(start_pos, end_pos)
+	var new_path = nav.get_simple_path(start_pos, end_pos)#this calculates the path FOR NOW wait till godot4
 	cache.erase(str(unit))
 	unit.update_path(new_path)
 #________________________________________________________________________________
-func calc_path(unit: MoveUnit, nav: Navigation):
+func calc_path(unit: MoveUnit, nav: Navigation):#gets the values from scptUnit
 	var key = str(unit)#the key gives an identifier tho each unit so 
 	if key in cache:
 		return

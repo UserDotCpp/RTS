@@ -17,11 +17,10 @@ var target
 #_____________________________________________________________________________________FRAME BY FRAME
 func _ready():
 	if team in team_colors:
-		
 		$MeshInstance.material_override = team_colors[team]
 	nav = get_tree().get_nodes_in_group("grpNavigation")[0]
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if (!unitCueStatus):
 		return false
 	update_move_vec()
@@ -44,7 +43,7 @@ func deselect():
 #______________________________________________________________________________________MOVEMENT CORE
 var last_straight_line_check = false
 
-func update_move_vec():
+func update_move_vec():#dum down vertion of movement for a kinematic body
 	if path_ind < path.size():
 		var move_vec = (path[path_ind] - global_transform.origin)
 		if move_vec.length() < 0.1:

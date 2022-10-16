@@ -1,0 +1,172 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://assets/sprites/Trees.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/bushes.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/gold.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/house.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/stone.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/town_center.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/barracks.png" type="Texture" id=7]
+
+[sub_resource type="CubeMesh" id=16]
+
+[sub_resource type="ConvexPolygonShape" id=17]
+points = PoolVector3Array( 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, -1, 1, 1, -1, -1, -1, 1, -1, -1, -1, 1, -1, -1, -1 )
+
+[sub_resource type="CubeMesh" id=14]
+
+[sub_resource type="ConvexPolygonShape" id=15]
+points = PoolVector3Array( 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, -1, 1, 1, -1, -1, -1, 1, -1, -1, -1, 1, -1, -1, -1 )
+
+[sub_resource type="CubeMesh" id=1]
+
+[sub_resource type="ConvexPolygonShape" id=9]
+points = PoolVector3Array( 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, -1, 1, 1, -1, -1, -1, 1, -1, -1, -1, 1, -1, -1, -1 )
+
+[sub_resource type="CubeMesh" id=5]
+
+[sub_resource type="ConvexPolygonShape" id=11]
+points = PoolVector3Array( 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, -1, 1, 1, -1, -1, -1, 1, -1, -1, -1, 1, -1, -1, -1 )
+
+[sub_resource type="CubeMesh" id=7]
+
+[sub_resource type="ConvexPolygonShape" id=12]
+points = PoolVector3Array( 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, -1, 1, 1, -1, -1, -1, 1, -1, -1, -1, 1, -1, -1, -1 )
+
+[sub_resource type="CubeMesh" id=10]
+
+[sub_resource type="ConvexPolygonShape" id=13]
+points = PoolVector3Array( 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, -1, 1, 1, -1, -1, -1, 1, -1, -1, -1, 1, -1, -1, -1 )
+
+[sub_resource type="CubeMesh" id=2]
+
+[sub_resource type="ConvexPolygonShape" id=4]
+points = PoolVector3Array( 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, -1, 1, 1, -1, -1, -1, 1, -1, -1, -1, 1, -1, -1, -1 )
+
+[node name="1x1" type="Spatial"]
+
+[node name="sTC" type="Spatial" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="sTC"]
+transform = Transform( 6, 0, 0, 0, 3, 0, 0, 0, 6, -26.1626, 3.07263, -3.12651 )
+visible = false
+mesh = SubResource( 16 )
+
+[node name="town_center" type="StaticBody" parent="sTC/MeshInstance"]
+
+[node name="CollisionShape" type="CollisionShape" parent="sTC/MeshInstance/town_center"]
+shape = SubResource( 17 )
+
+[node name="Sprite3D" type="Sprite3D" parent="sTC"]
+transform = Transform( 2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -27.4359, 4.88673, -2.76346 )
+billboard = 1
+texture = ExtResource( 6 )
+
+[node name="sBarracks" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.6492, 0, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="sBarracks"]
+transform = Transform( 4.5, 0, 0, 0, 3, 0, 0, 0, 4.5, 5.59063, 3.32312, -1.58279 )
+visible = false
+mesh = SubResource( 14 )
+
+[node name="barrack" type="StaticBody" parent="sBarracks/MeshInstance"]
+
+[node name="CollisionShape" type="CollisionShape" parent="sBarracks/MeshInstance/barrack"]
+shape = SubResource( 15 )
+
+[node name="Sprite3D" type="Sprite3D" parent="sBarracks"]
+transform = Transform( 4.5, 0, 0, 0, 4.5, 0, 0, 0, 4.5, 5.08775, 3.83344, 0 )
+billboard = 1
+texture = ExtResource( 7 )
+
+[node name="sTree" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 19.4038, 2, 1.67463 )
+
+[node name="MeshInstance" type="MeshInstance" parent="sTree"]
+transform = Transform( 1.5, 0, 0, 0, 2, 0, 0, 0, 1.5, 0, 1, 0 )
+visible = false
+mesh = SubResource( 1 )
+skeleton = NodePath("../..")
+
+[node name="tree" type="StaticBody" parent="sTree/MeshInstance"]
+
+[node name="CollisionShape" type="CollisionShape" parent="sTree/MeshInstance/tree"]
+shape = SubResource( 9 )
+
+[node name="Sprite3D" type="Sprite3D" parent="sTree"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.999365, 0 )
+billboard = 1
+texture = ExtResource( 1 )
+
+[node name="sBerry" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.081, 0, 1.67463 )
+
+[node name="MeshInstance" type="MeshInstance" parent="sBerry"]
+transform = Transform( 1.5, 0, 0, 0, 2, 0, 0, 0, 1.5, 0.0599594, 2.18875, 0 )
+visible = false
+mesh = SubResource( 5 )
+
+[node name="berry" type="StaticBody" parent="sBerry/MeshInstance"]
+
+[node name="CollisionShape" type="CollisionShape" parent="sBerry/MeshInstance/berry"]
+shape = SubResource( 11 )
+
+[node name="Sprite3D" type="Sprite3D" parent="sBerry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0776176, 1.02675, 0 )
+billboard = 1
+texture = ExtResource( 2 )
+
+[node name="sGold" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.99701, -0.312561, 1.67463 )
+
+[node name="MeshInstance" type="MeshInstance" parent="sGold"]
+transform = Transform( 1.5, 0, 0, 0, 2, 0, 0, 0, 1.5, 10.0316, 2.48002, 0 )
+visible = false
+mesh = SubResource( 7 )
+
+[node name="gold" type="StaticBody" parent="sGold/MeshInstance"]
+
+[node name="CollisionShape" type="CollisionShape" parent="sGold/MeshInstance/gold"]
+shape = SubResource( 12 )
+
+[node name="Sprite3D" type="Sprite3D" parent="sGold"]
+transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 1, 10.0444, 1.3739, 0 )
+billboard = 2
+texture = ExtResource( 3 )
+
+[node name="sRock" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0845, 1.22639, 1.67463 )
+
+[node name="MeshInstance" type="MeshInstance" parent="sRock"]
+transform = Transform( 1.5, 0, 0, 0, 2, 0, 0, 0, 1.5, -0.438432, 1.09673, 0 )
+visible = false
+mesh = SubResource( 10 )
+
+[node name="rock" type="StaticBody" parent="sRock/MeshInstance"]
+
+[node name="CollisionShape" type="CollisionShape" parent="sRock/MeshInstance/rock"]
+shape = SubResource( 13 )
+
+[node name="Sprite3D" type="Sprite3D" parent="sRock"]
+transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, -0.408418, -0.105719, 0 )
+texture = ExtResource( 5 )
+
+[node name="sHouse" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.87161, -1.37858, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="sHouse"]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 4.72432, 0 )
+visible = false
+mesh = SubResource( 2 )
+skeleton = NodePath("../Sprite3D")
+
+[node name="house" type="StaticBody" parent="sHouse/MeshInstance"]
+
+[node name="CollisionShape" type="CollisionShape" parent="sHouse/MeshInstance/house"]
+shape = SubResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="sHouse"]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, -1.64173, 5.39662, 0.360653 )
+billboard = 1
+texture = ExtResource( 4 )

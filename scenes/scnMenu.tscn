@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
+[ext_resource path="res://assets/main_theme.mp3" type="AudioStream" id=1]
 [ext_resource path="res://scripts/scptMenu.gd" type="Script" id=2]
 [ext_resource path="res://assets/pantalla de inicio/fondo.png" type="Texture" id=3]
 [ext_resource path="res://assets/pantalla de inicio/cuadradis gamer.png" type="Texture" id=4]
@@ -76,6 +77,9 @@ anchor_bottom = 1.0
 margin_top = 1.0
 margin_bottom = 1.0
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -125,3 +129,8 @@ margin_bottom = 40.0
 rect_scale = Vector2( 10, 10 )
 text = "RTS loco
 "
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+volume_db = -13.983
+autoplay = true

@@ -71,6 +71,7 @@ layers = 2
 generate_lightmap = false
 billboard = 1
 frames = SubResource( 7 )
+frame = 5
 playing = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]

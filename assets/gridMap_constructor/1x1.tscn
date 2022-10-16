@@ -76,7 +76,6 @@ texture = ExtResource( 4 )
 
 [node name="MeshInstance" type="MeshInstance" parent="sGold"]
 transform = Transform( 1.5, 0, 0, 0, 2, 0, 0, 0, 1.5, 10.0316, 2.48002, 0 )
-visible = false
 mesh = SubResource( 7 )
 
 [node name="gold" type="StaticBody" parent="sGold/MeshInstance"]

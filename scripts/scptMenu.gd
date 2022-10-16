@@ -14,7 +14,6 @@ func _input(event):
 
 func changeMap():
 # warning-ignore:return_value_discarded
-
 	get_tree().change_scene_to(load("res://scenes/scnWorldMap.tscn"))
 	queue_free()
 	pass

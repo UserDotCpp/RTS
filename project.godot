@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="RTS"
-run/main_scene="res://scenes/scnMenu.tscn"
+run/main_scene="res://scenes/scnWorldMap.tscn"
 boot_splash/image="res://assets/art/place_holder_loading_screen.png"
 boot_splash/use_filter=false
 config/icon="res://assets/art/ico.png"
@@ -38,6 +38,7 @@ settings/fps/force_fps=60
 
 window/size/width=840
 window/size/height=480
+window/size/resizable=false
 window/size/test_width=840
 window/size/test_height=480
 window/vsync/use_vsync=false
