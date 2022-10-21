@@ -59,19 +59,13 @@ visible = false
 mesh = SubResource( 3 )
 material/0 = SubResource( 4 )
 
-[node name="olLight" type="OmniLight" parent="miSelectionRing"]
-transform = Transform( 0.769231, 0, 0, 0, 1, 0, 0, 0, 0.769231, -0.154542, 0, 0 )
-light_color = Color( 0.909804, 1, 0.686275, 1 )
-light_energy = 0.413
-light_indirect_energy = 0.706
-
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 1, -0.0236579, 0.980877, 0 )
 layers = 2
 generate_lightmap = false
 billboard = 1
 frames = SubResource( 7 )
-frame = 5
+frame = 4
 playing = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]

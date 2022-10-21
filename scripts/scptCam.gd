@@ -42,6 +42,8 @@ func _input(event):
 	if Input.is_action_just_pressed("leftMouse"): 
 		selection_box.start_sel_pos = m_pos
 		start_sel_pos = m_pos
+		#print(map.get_cell_item(map.world_to_map(raycast_from_mouse(event.position, 1).position).x ,0 ,map.world_to_map(raycast_from_mouse(event.position, 1).position).z))
+
 
 	if Input.is_action_pressed("leftMouse"):#if is press
 		selection_box.m_pos = m_pos
@@ -56,21 +58,22 @@ func _input(event):
 		#print(map.world_to_map(raycast_from_mouse(m_pos, 1).position))
 		#selector.translation = Vector3(map.world_to_map(raycast_from_mouse(m_pos, 1).position).x,1,map.world_to_map(raycast_from_mouse(m_pos, 1).position).z)
 		var poss = raycast_from_mouse(m_pos, 1).position
-		selector.get_surface_material(0).set_shader_param("current_color", red)#sets the shader of the selector box 
+		selector.get_surface_material(0).set_shader_param("current_color", yellow)#sets the shader of the selector box 
 
 		#the translation of the mouse position on the gridmap and the tile is the sentered tile inside the selector position 
-		selector.translation = Vector3(round(poss.x), round(poss.y)/ 2, round(poss.z)) 
-		var tile = map.get_cell_item(round(poss.x) / 2, round(poss.y)/ 2, round(poss.z) / 2)
+		selector.translation = Vector3(round(poss.x ), 0, round(poss.z))  #round(poss.y)/ 2
+		var tile = map.get_cell_item(round(poss.x+ 0.9) / 2, 0, round(poss.z+ 0.9) / 2) #round(poss.y)/ 2
 		
-		if (tile == 0):
+		if (tile >= 0 ):
 			#if there is something iside the tile, the selector goes on top of it
+			selector.get_surface_material(0).set_shader_param("current_color", red)
 			selector.translation = Vector3(round(poss.x), 4, round(poss.z))
 		if event is InputEventMouseButton:
 			var posi = event.position#for some reason the event position is more acurred that the live mouse position, ://///
-			if event.pressed and tile != 0:
+			if event.pressed:
 				var tile_pos= map.world_to_map(raycast_from_mouse(posi, 1).position)
-				#print(tile_pos.x," ",tile_pos.y," ",tile_pos.z)
-				map.set_cell_item(tile_pos.x ,2 ,tile_pos.z ,0 ,0 )#(int x, int y, int z, int item of the grid map, int orientation= 0 )
+				if (map.get_cell_item(tile_pos.x ,0 ,tile_pos.z) == -1):
+					map.set_cell_item(tile_pos.x ,0 ,tile_pos.z ,4 ,0 )#(int x, int y, int z, int item of the grid map, int orientation= 0 )
 	if Input.is_action_just_released("q"):#this hides the selector under the ground 
 		selector.translation = Vector3(0,-4,0)
 
@@ -119,7 +122,7 @@ func select_units(fake_m_pos):
 
 func get_unit_under_mouse(fake_m_pos):#this checks if the unit under the mouse is from your team 
 	var result = raycast_from_mouse(fake_m_pos, 1)
-	print(result)
+	#print(result)
 	if result and "team" in result.collider and result.collider.team == team:
 		return result.collider
 

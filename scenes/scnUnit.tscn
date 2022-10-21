@@ -59,12 +59,6 @@ mesh = SubResource( 1 )
 skeleton = NodePath("../..")
 material/0 = SubResource( 3 )
 
-[node name="olLight" type="OmniLight" parent="KinematicBody/miSelectionRing"]
-transform = Transform( 0.769231, 0, 0, 0, 1, 0, 0, 0, 0.769231, -0.154542, 0, 0 )
-light_color = Color( 0.909804, 1, 0.686275, 1 )
-light_energy = 0.413
-light_indirect_energy = 0.706
-
 [node name="MeshInstance" type="MeshInstance" parent="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -2, 0, 1, -8.74228e-08, 0, 1.10913, 4.77012e-09 )
 layers = 2
@@ -78,7 +72,7 @@ layers = 2
 generate_lightmap = false
 billboard = 1
 frames = SubResource( 5 )
-frame = 15
+frame = 5
 playing = true
 
 [node name="CollisionShape" type="CollisionShape" parent="KinematicBody"]
