@@ -9,6 +9,7 @@ const MOVE_SPEED = 50
 onready var cam = $cmCam #onready coss whe need to know the mouse position at all times
 onready var selector = get_parent().get_node("spBuilding_selector/msSelector") #the selector for the building placement
 onready var map = get_parent().get_node("nvNavigationCore/nviNavMesh/gm1x1") #the gridmap
+onready var resource = preload("res://scenes/scnResource.tscn")
 
 var team = 0
 var selected_units = []
@@ -43,7 +44,13 @@ func _input(event):
 		selection_box.start_sel_pos = m_pos
 		start_sel_pos = m_pos
 		#print(map.get_cell_item(map.world_to_map(raycast_from_mouse(event.position, 1).position).x ,0 ,map.world_to_map(raycast_from_mouse(event.position, 1).position).z))
-
+		var pos = map.world_to_map(raycast_from_mouse(event.position, 1).position)
+		if (map.get_cell_item(pos.x ,0 ,pos.z) == 0):
+			map.set_cell_item(pos.x ,0 ,pos.z, -1, 0)
+			var reso = resource.instance()
+			get_parent().get_node("nvNavigationCore/nviNavMesh").add_child(reso)
+			#reso.translation = Vector3(round(pos.x) * 2, 1, round(pos.z) * 2)
+			reso.translation = Vector3((pos.x + 0.5) * 2, 1, (pos.z + 0.5) * 2)
 
 	if Input.is_action_pressed("leftMouse"):#if is press
 		selection_box.m_pos = m_pos
@@ -78,6 +85,7 @@ func _input(event):
 		selector.translation = Vector3(0,-4,0)
 
 	if Input.is_action_pressed("escape"):#reloads the map
+		# warning-ignore:return_value_discarded
 		get_tree().change_scene_to(load("res://scenes/scnWorldMap.tscn"))
 		queue_free()
 		pass
