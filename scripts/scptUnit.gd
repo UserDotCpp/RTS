@@ -1,6 +1,6 @@
 extends Spatial
 
-class_name MoveUnit
+class_name cUnit
 
 var nav : Navigation
 var target
@@ -21,6 +21,8 @@ var team_colors = {
 	0: preload("res://assets/materials/matTeam1.tres"),
 	1: preload("res://assets/materials/matTeam2.tres")
 }
+
+export var idle_status = true
 
 #_____________________________________________________________________________________FRAME BY FRAME
 func _ready():
@@ -45,6 +47,7 @@ func get_target_move_pos():#this gives the que manager the updathed position of 
 func move_to(target_pos):#this gets the mouse poss from scptCam
 	target = target_pos
 	unitCueStatus = true#this tells the _physics_process(delta): to start working
+	idle_status = false
 	#target = get_tree().get_nodes_in_group("grpTarget")[0]
 	#cuedOrders.insert(counter, counter)
 	#auxCounter = counter
@@ -76,7 +79,7 @@ func update_move_vec():
 		var target_pos = get_target_move_pos()
 		target_pos.y = 0.0
 		move_vec = current_pos.direction_to(target_pos)#this gets the current path position
-		
+	#CALCULATE THE NEXT PATH
 	elif path_ind < path.size():#if the unit isnt on a strait line to the target and it isnt the last part of the path
 		var next_path_pos = path[path_ind]
 		next_path_pos.y = 0.0#this gets the next path position
@@ -85,6 +88,7 @@ func update_move_vec():
 			path_ind += 1
 			next_path_pos = path[path_ind]
 			next_path_pos.y = 0.0
+		#THIS GONNA BE THE NEXT PATH
 		move_vec = current_pos.direction_to(next_path_pos)#_________________________________________
 	last_straight_line_check = straight_line_check 
 
@@ -104,6 +108,7 @@ func can_move_in_straight_line():
 		#	return false
 		#print(auxCounter)
 		unitCueStatus = false
+		idle_status = true
 		return false
 	
 	if pos.distance_squared_to(target_pos) > min_dist_to_check_los * min_dist_to_check_los:#the target isnt near the check treshhold yet
@@ -112,16 +117,18 @@ func can_move_in_straight_line():
 	var right : Vector3 = target_pos - pos #this is the distance to the next path on the index from the current location
 	right.y = 0.0
 	right = right.rotated(Vector3.UP, PI/2.0).normalized()#this makes the unit point to the target
+
 	var ray_right_start_pos = pos + right * char_radius
 	var ray_left_start_pos = pos + -right * char_radius
 	var ray_right_end_pos = target_pos + right * char_radius
 	var ray_left_end_pos = target_pos + -right * char_radius
 
 	var space_state = get_world().direct_space_state#_________________LOOKING FOR STUF NEAR THE UNIT
+	
 	var los_left = space_state.intersect_ray(ray_left_start_pos, ray_left_end_pos, [], 1).size() == 0
 	var los_right = space_state.intersect_ray(ray_right_start_pos, ray_right_end_pos, [], 1).size() == 0
 	return los_left and los_right #this tells u if u r gonna collide with something AND if u make the colaiders public, u can reuse this function ass a searcher
-	
+
 #______________________________________________________________________GETS PATH FROM "scnCueManager" -sowwi ;)
 func update_path(_path: Array):
 	if _path.size() == 0.1:
