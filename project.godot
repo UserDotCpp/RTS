@@ -10,12 +10,12 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Spatial",
-"class": "MoveUnit",
+"class": "cUnit",
 "language": "GDScript",
 "path": "res://scripts/scptUnit.gd"
 } ]
 _global_script_class_icons={
-"MoveUnit": ""
+"cUnit": ""
 }
 
 [application]

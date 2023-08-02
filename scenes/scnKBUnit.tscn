@@ -65,8 +65,7 @@ layers = 2
 generate_lightmap = false
 billboard = 1
 frames = SubResource( 7 )
-frame = 4
-playing = true
+frame = 14
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09591, 0 )

@@ -1,6 +1,7 @@
 extends KinematicBody
  
 export var team = 0
+export var idle_status = true
 var team_colors = {
 	0: preload("res://assets/materials/matTeam1.tres"),
 	1: preload("res://assets/materials/matTeam2.tres")
@@ -49,6 +50,6 @@ func update_move_vec():#dum down vertion of movement for a kinematic body
 		if move_vec.length() < 0.1:
 			path_ind += 1
 		else:
+			# warning-ignore:return_value_discarded
 			move_and_slide(move_vec.normalized() * move_speed, Vector3(0, 1, 0))
- 
 

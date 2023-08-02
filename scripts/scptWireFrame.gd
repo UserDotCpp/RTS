@@ -25,8 +25,8 @@ func cell_create(size, offset):
 	vertices = null
 
 func _ready():
-	for x_offset in range(-30,30):
-		for z_offset in range(-30,30):
+	for x_offset in range(-10,10):
+		for z_offset in range(-10,10):
 			var offset = Vector3(x_offset, 0, z_offset)*grid_size + Vector3(1,0,1)*grid_size/2
 			cell_create(grid_size, offset)
 

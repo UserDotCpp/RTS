@@ -9,6 +9,7 @@ const MOVE_SPEED = 50
 onready var cam = $cmCam #onready coss whe need to know the mouse position at all times
 onready var selector = get_parent().get_node("spBuilding_selector/msSelector") #the selector for the building placement
 onready var map = get_parent().get_node("nvNavigationCore/nviNavMesh/gm1x1") #the gridmap
+onready var resource = preload("res://scenes/scnResource.tscn")
 
 var team = 0
 var selected_units = []
@@ -38,12 +39,26 @@ func _input(event):
 #catches all the user action pre stated on the "Input Map"<- (on the project settings)
 	if Input.is_action_just_pressed("rightMouse"):
 		move_selected_units(m_pos)
-
+		
 	if Input.is_action_just_pressed("leftMouse"): 
 		selection_box.start_sel_pos = m_pos
 		start_sel_pos = m_pos
-		#print(map.get_cell_item(map.world_to_map(raycast_from_mouse(event.position, 1).position).x ,0 ,map.world_to_map(raycast_from_mouse(event.position, 1).position).z))
-
+		if(Input.is_action_pressed("q")):#for testing
+			return false
+		var pos = map.world_to_map(raycast_from_mouse(event.position, 1).position)
+		var tile = map.get_cell_item(pos.x ,0 ,pos.z)
+		if (tile != -1):
+			map.set_cell_item(pos.x ,0 ,pos.z, -1, 0)
+			var reso =  resource.instance()
+			reso.set_name(str(tile,"/x/",pos.x,"z",pos.y,")"))
+			get_parent().get_node("nvNavigationCore/resources").add_child(reso) #podes guardar el nodo dentro de una variable -> si lo metes adentro de una matris lo podes llamar por el nombre de la matris
+			#reso.set_name(str("@"+str(tile)+"@")) #when instansing the first one doenst have the @, FUNNN #NO set the cordinates as names, 
+			print(pos)
+			print(pos.y)
+			#reso.set_name(str(pos))
+			reso.translation = Vector3((pos.x + 0.5) * 2, 1, (pos.z + 0.5) * 2)
+			pos = map.get_cell_item(pos.x ,0 ,pos.z)
+			reso.set_the_sprite(tile)
 
 	if Input.is_action_pressed("leftMouse"):#if is press
 		selection_box.m_pos = m_pos
@@ -52,6 +67,7 @@ func _input(event):
 		selection_box.is_visible = false
 	if Input.is_action_just_released("leftMouse"):#when is freed
 		select_units(m_pos)
+		#set_name("este")
 
 
 	if (Input.is_action_pressed("q")):#building placement function
@@ -63,9 +79,8 @@ func _input(event):
 		#the translation of the mouse position on the gridmap and the tile is the sentered tile inside the selector position 
 		selector.translation = Vector3(round(poss.x ), 0, round(poss.z))  #round(poss.y)/ 2
 		var tile = map.get_cell_item(round(poss.x+ 0.9) / 2, 0, round(poss.z+ 0.9) / 2) #round(poss.y)/ 2
-		
 		if (tile >= 0 ):
-			#if there is something iside the tile, the selector goes on top of it
+			#if there is something iside the tile, the selector goes on top of it, get rid of this when the "q" is done
 			selector.get_surface_material(0).set_shader_param("current_color", red)
 			selector.translation = Vector3(round(poss.x), 4, round(poss.z))
 		if event is InputEventMouseButton:
@@ -73,11 +88,13 @@ func _input(event):
 			if event.pressed:
 				var tile_pos= map.world_to_map(raycast_from_mouse(posi, 1).position)
 				if (map.get_cell_item(tile_pos.x ,0 ,tile_pos.z) == -1):
+					print((str(raycast_from_mouse(m_pos, 1).collider)))
 					map.set_cell_item(tile_pos.x ,0 ,tile_pos.z ,4 ,0 )#(int x, int y, int z, int item of the grid map, int orientation= 0 )
 	if Input.is_action_just_released("q"):#this hides the selector under the ground 
 		selector.translation = Vector3(0,-4,0)
 
 	if Input.is_action_pressed("escape"):#reloads the map
+		# warning-ignore:return_value_discarded
 		get_tree().change_scene_to(load("res://scenes/scnWorldMap.tscn"))
 		queue_free()
 		pass
@@ -97,7 +114,6 @@ func _input(event):
 	#	if cam.size > 5:
 	#		cam.size -= 1
 	#		_adjust_viewport_size()
-
 	#if (Input.is_action_just_pressed("mouse_wheel_down")):
 	#	if cam.size > 5:
 	#		cam.size += 1
@@ -122,7 +138,7 @@ func select_units(fake_m_pos):
 
 func get_unit_under_mouse(fake_m_pos):#this checks if the unit under the mouse is from your team 
 	var result = raycast_from_mouse(fake_m_pos, 1)
-	#print(result)
+	print(result)
 	if result and "team" in result.collider and result.collider.team == team:
 		return result.collider
 
@@ -142,7 +158,6 @@ func get_units_in_box(top_left, bot_right):
 		if unit.team == team and box.has_point(cam.unproject_position(unit.global_transform.origin)):
 			box_selected_units.append(unit)
 	return box_selected_units
-
 
 #________________________________________________________________________________________________________CAM INTERACTION/MOUSE POINTER
 func calc_move(delta):
@@ -191,19 +206,10 @@ func raycast_from_mouse(fake_m_pos, collision_mask):#this gives the position of 
 #________________________________________________________________________________________________________UNITS COMANDS
 func move_selected_units(fake_m_pos):
 	var result = raycast_from_mouse(fake_m_pos, 1)
-	
+	print(result)
 	if result:
 		for unit in selected_units:
 			#unit.move_to(result.position , 1 , counter)
 			unit.move_to(result.position)
 			CueManager.queStatus = true
-
-#func move_all_units(m_pos):
-#	var result = raycast_from_mouse(m_pos, 1)
-#	if result:	
-#		get_tree().call_group("gUnit", "move_to", result.position , true)
-		#var targetInstance = target.instance()
-		#get_parent().get_node("TargetBase").add_child(targetInstance)
-		#get_parent().get_node("TargetBase/Position3D").translation = testt
-#		CueManager.queStatus = true	
 #________________________________________________________________________________________________________

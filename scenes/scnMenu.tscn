@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://assets/main_theme.mp3" type="AudioStream" id=1]
+[ext_resource path="res://assets/audio/main_theme.mp3" type="AudioStream" id=1]
 [ext_resource path="res://scripts/scptMenu.gd" type="Script" id=2]
 [ext_resource path="res://assets/pantalla de inicio/fondo.png" type="Texture" id=3]
 [ext_resource path="res://assets/pantalla de inicio/cuadradis gamer.png" type="Texture" id=4]
@@ -108,13 +108,13 @@ scale = Vector2( 0.626398, 0.668501 )
 texture = ExtResource( 4 )
 
 [node name="select" type="Label" parent="CanvasLayer"]
-margin_left = 201.0
-margin_top = 405.0
-margin_right = 361.0
-margin_bottom = 419.0
+margin_left = 177.0
+margin_top = 429.0
+margin_right = 342.0
+margin_bottom = 443.0
 rect_scale = Vector2( 3, 3 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "-press \"left click\" to start"
+text = "-press \"left click\" to start-"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/select"]
 anims/RESET = SubResource( 4 )

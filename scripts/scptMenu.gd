@@ -2,6 +2,7 @@ extends MarginContainer
 
 onready var anim_player = $CanvasLayer/fondo/AnimationPlayer
 onready var selector = $CanvasLayer/select/AnimationPlayer
+onready var muss = $AudioStreamPlayer
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	anim_player.play("fondo")
@@ -14,6 +15,7 @@ func _input(event):
 
 func changeMap():
 # warning-ignore:return_value_discarded
+	muss.stop()
 	get_tree().change_scene_to(load("res://scenes/scnWorldMap.tscn"))
 	queue_free()
 	pass

@@ -16,7 +16,7 @@ func dequeue_path_request():
 	if queue.size() == 0:
 		return
 	var calc_path_info = queue.pop_front()
-	var unit: MoveUnit = calc_path_info.unit
+	var unit: cUnit = calc_path_info.unit
 	var nav: Navigation = calc_path_info.nav
 	var start_pos = unit.global_transform.origin
 	var end_pos = unit.get_target_move_pos()
@@ -24,7 +24,7 @@ func dequeue_path_request():
 	cache.erase(str(unit))
 	unit.update_path(new_path)
 #________________________________________________________________________________
-func calc_path(unit: MoveUnit, nav: Navigation):#gets the values from scptUnit
+func calc_path(unit: cUnit, nav: Navigation):#gets the values from scptUnit
 	var key = str(unit)#the key gives an identifier tho each unit so 
 	if key in cache:
 		return
