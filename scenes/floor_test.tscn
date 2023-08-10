@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bder5m5tem1a2"]
+
+[ext_resource type="Texture2D" uid="uid://buuvtl4jy7862" path="res://assets/textures/sand.png" id="1_vx7gj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_md8j6"]
+albedo_texture = ExtResource("1_vx7gj")
+uv1_scale = Vector3(75, 75, 75)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qq7q3"]
+material = SubResource("StandardMaterial3D_md8j6")
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_b723q"]
+
+[node name="floor" type="MeshInstance3D"]
+transform = Transform3D(72.4843, 0, 0, 0, 1, 0, 0, 0, 76.5855, 0, 0, 0)
+mesh = SubResource("PlaneMesh_qq7q3")
+
+[node name="floor_body" type="StaticBody3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape3D" parent="floor_body"]
+shape = SubResource("WorldBoundaryShape3D_b723q")

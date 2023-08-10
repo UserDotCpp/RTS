@@ -2,4 +2,5 @@
 .godot/
 .import/
 .git/
-
+export/
+export_presets.cfg

@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://jdy3xudaw3fc"]
+
+[ext_resource type="Script" path="res://script/resource.gd" id="1_mjfrx"]
+[ext_resource type="Texture2D" uid="uid://ud0kxy8hqghf" path="res://assets/sprites/Trees.png" id="2_8uwov"]
+[ext_resource type="Texture2D" uid="uid://d0fqwtj4rkqin" path="res://assets/sprites/bushes.png" id="3_43jsc"]
+[ext_resource type="Texture2D" uid="uid://d27hd1b0htcoh" path="res://assets/sprites/gold.png" id="4_7a768"]
+[ext_resource type="Texture2D" uid="uid://c3en17wd5vkhx" path="res://assets/sprites/stone.png" id="5_yx6n6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d8sdg"]
+size = Vector3(1, 0.670467, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k2hyf"]
+size = Vector3(3.96389, 1, 4.05968)
+
+[node name="resource_node" type="StaticBody3D"]
+script = ExtResource("1_mjfrx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.685352, 0)
+shape = SubResource("BoxShape3D_d8sdg")
+
+[node name="sprites" type="Node3D" parent="."]
+
+[node name="1" type="Sprite3D" parent="sprites"]
+transform = Transform3D(1, 0, 0, 0, 0.932601, 0.360908, 0, -0.360908, 0.932601, 0, 0.878742, 0)
+visible = false
+billboard = 1
+texture = ExtResource("2_8uwov")
+
+[node name="2" type="Sprite3D" parent="sprites"]
+transform = Transform3D(0.7, 0, 0, 0, 0.91407, 0.405556, 0, -0.405556, 0.91407, 0, 0.0742738, 0)
+visible = false
+billboard = 1
+texture = ExtResource("3_43jsc")
+
+[node name="3" type="Sprite3D" parent="sprites"]
+transform = Transform3D(4, 0, 0, 0, 3.72274, 1.46328, 0, -1.46328, 3.72274, 0.00087738, 0, 0)
+visible = false
+billboard = 1
+texture = ExtResource("4_7a768")
+
+[node name="4" type="Sprite3D" parent="sprites"]
+transform = Transform3D(4, 0, 0, 0, 3.53483, 1.87215, 0, -1.87215, 3.53483, 0, 0, 0)
+visible = false
+billboard = 1
+texture = ExtResource("5_yx6n6")
+
+[node name="area" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.477316, 0)
+shape = SubResource("BoxShape3D_k2hyf")

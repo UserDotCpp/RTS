@@ -1,0 +1,84 @@
+[gd_scene load_steps=12 format=3 uid="uid://b38600acocjuq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ynww"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_17bcv"]
+material = SubResource("StandardMaterial3D_8ynww")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cjnix"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jnld3"]
+albedo_color = Color(0.298039, 1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bls3o"]
+material = SubResource("StandardMaterial3D_jnld3")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uiom3"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2d6jk"]
+material = SubResource("StandardMaterial3D_uiom3")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dj3cf"]
+albedo_color = Color(1, 0.815686, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_f3l5p"]
+material = SubResource("StandardMaterial3D_dj3cf")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_co3ol"]
+albedo_color = Color(0, 0, 0.25098, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pq6ob"]
+material = SubResource("StandardMaterial3D_co3ol")
+
+[node name="resourses" type="Node3D"]
+
+[node name="control_cube" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1, 0)
+visible = false
+mesh = SubResource("BoxMesh_17bcv")
+
+[node name="control_cube_sb" type="StaticBody3D" parent="control_cube"]
+
+[node name="c0" type="CollisionShape3D" parent="control_cube/control_cube_sb"]
+shape = SubResource("BoxShape3D_cjnix")
+
+[node name="tree" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.34124, 0, 0, 0, 2, 0, 0, 0, 1.31948, 0, 1, 0)
+mesh = SubResource("BoxMesh_bls3o")
+
+[node name="control_cube_sb" type="StaticBody3D" parent="tree"]
+
+[node name="c1" type="CollisionShape3D" parent="tree/control_cube_sb"]
+transform = Transform3D(1.49116, 0, 0, 0, 1, 0, 0, 0, 1.51575, 0, 0, 0)
+shape = SubResource("BoxShape3D_cjnix")
+
+[node name="berry" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.43292, 0, 0, 0, 0.991926, 0, 0, 0, 1.36272, 0, 0.504239, 0)
+mesh = SubResource("BoxMesh_2d6jk")
+
+[node name="control_cube_sb" type="StaticBody3D" parent="berry"]
+
+[node name="c2" type="CollisionShape3D" parent="berry/control_cube_sb"]
+transform = Transform3D(1.39575, 0, 0, 0, 1.587, 0, 0, 0, 1.46765, 0, 0.274801, 0)
+shape = SubResource("BoxShape3D_cjnix")
+
+[node name="gold" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.25245, 0, 0, 0, 0.730829, 0, 0, 0, 1.09955, 0, 0.387822, 0)
+mesh = SubResource("BoxMesh_f3l5p")
+
+[node name="control_cube_sb" type="StaticBody3D" parent="gold"]
+
+[node name="c3" type="CollisionShape3D" parent="gold/control_cube_sb"]
+transform = Transform3D(1.59687, 0, 0, 0, 1.95001, 0, 0, 0, 1.81892, 0, 0.472512, 0)
+shape = SubResource("BoxShape3D_cjnix")
+
+[node name="stone" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.951364, 0, 0, 0, 0.878823, 0, 0, 0, 1.13012, 0, 0.444138, 0)
+mesh = SubResource("BoxMesh_pq6ob")
+
+[node name="control_cube_sb" type="StaticBody3D" parent="stone"]
+
+[node name="c4" type="CollisionShape3D" parent="stone/control_cube_sb"]
+transform = Transform3D(2.10224, 0, 0, 0, 1.4229, 0, 0, 0, 1.76972, 0, 0.210033, 0)
+shape = SubResource("BoxShape3D_cjnix")
