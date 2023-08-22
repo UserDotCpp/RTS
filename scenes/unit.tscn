@@ -52,13 +52,13 @@ one_shot = true
 
 [node name="RayCast" type="RayCast3D" parent="."]
 
-[node name="Area" type="Area3D" parent="."]
+[node name="cluster_check_area" type="Area3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area"]
+[node name="collision_shape" type="CollisionShape3D" parent="cluster_check_area"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.773468, 0)
 shape = SubResource("CylinderShape3D_dr7ca")
 disabled = true
 
 [connection signal="navigation_finished" from="NavigationAgent" to="." method="_on_navigation_agent_navigation_finished"]
 [connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
-[connection signal="body_entered" from="Area" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="cluster_check_area" to="." method="_on_cluster_check_area_body_entered"]

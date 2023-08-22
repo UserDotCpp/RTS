@@ -6,7 +6,7 @@ var start_sel_pos = Vector2()
 const sel_box_col = Color(0, 1, 0)
 const sel_box_line_width = 3
 
-#______________________________________________________________________________________SELECTION BOX
+#__________________________________________SELECTION BOX____________________________________________
 func _draw() -> void:
 	if is_visible and start_sel_pos != mouce_position:
 		draw_line(start_sel_pos, Vector2(mouce_position.x, start_sel_pos.y), sel_box_col, sel_box_line_width)

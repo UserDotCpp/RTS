@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://rorit1pml0iu"]
+
+[ext_resource type="Script" path="res://script/building/lumber_camp.gd" id="1_2gts8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mq2fc"]
+albedo_color = Color(0.0470588, 0.270588, 0.00392157, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vk4xg"]
+material = SubResource("StandardMaterial3D_mq2fc")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lkj1w"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3by23"]
+size = Vector3(51.6244, 1, 51.9569)
+
+[node name="lumber_camp" type="StaticBody3D"]
+collision_layer = 8388609
+collision_mask = 8388609
+script = ExtResource("1_2gts8")
+
+[node name="mesh_instance" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1, 0)
+mesh = SubResource("BoxMesh_vk4xg")
+
+[node name="collision_shape" type="CollisionShape3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1, 0)
+shape = SubResource("BoxShape3D_lkj1w")
+
+[node name="lumberjack_area" type="Area3D" parent="."]
+collision_layer = 8388608
+collision_mask = 8388608
+
+[node name="collision_shape" type="CollisionShape3D" parent="lumberjack_area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.768023, 0)
+shape = SubResource("BoxShape3D_3by23")
+
+[connection signal="body_entered" from="lumberjack_area" to="." method="_on_lumberjack_area_body_entered"]

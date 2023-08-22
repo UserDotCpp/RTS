@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://cccttlnb7frqo"]
+
+[ext_resource type="Script" path="res://script/fog_of_war_texture.gd" id="1_b8r6o"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hlahh"]
+blend_mode = 3
+light_mode = 1
+
+[node name="fog_of_war_texture" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b8r6o")
+
+[node name="timer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="sub_viewport_container" type="SubViewportContainer" parent="."]
+texture_repeat = 2
+layout_mode = 0
+offset_right = 512.0
+offset_bottom = 512.0
+scale = Vector2(0.35, 0.35)
+
+[node name="sub_viewport" type="SubViewport" parent="sub_viewport_container"]
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="fog_camera" type="Camera2D" parent="sub_viewport_container/sub_viewport"]
+
+[node name="fog_explored" type="ColorRect" parent="sub_viewport_container/sub_viewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.164706, 0.164706, 0.164706, 1)
+
+[node name="fog_sprite" type="Sprite2D" parent="sub_viewport_container/sub_viewport"]
+material = SubResource("CanvasItemMaterial_hlahh")
+
+[node name="units_in_fog" type="Node2D" parent="sub_viewport_container/sub_viewport"]

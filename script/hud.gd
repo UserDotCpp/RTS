@@ -21,24 +21,24 @@ func _input(_event) -> void:
 		if cam.size <= 100:
 			cam.size += 6
 
-func _on_up_mouse_entered():
+func _on_up_mouse_entered() -> void:
 	#changes_to_cam_y += 0.25
 	changes_to_cam_z += 0.40
-func _on_right_mouse_entered():
+func _on_right_mouse_entered() -> void:
 	changes_to_cam_x -= 0.25
-func _on_left_mouse_entered():
+func _on_left_mouse_entered() -> void:
 	changes_to_cam_x += 0.25
-func _on_down_mouse_entered():
+func _on_down_mouse_entered() -> void:
 	#changes_to_cam_y -= 0.25
 	changes_to_cam_z -= 0.40
 
-func _on_up_mouse_exited():
+func _on_up_mouse_exited() -> void:
 	changes_to_cam_y = 0
 	changes_to_cam_z = 0
-func _on_right_mouse_exited():
+func _on_right_mouse_exited() -> void:
 	changes_to_cam_x = 0
-func _on_left_mouse_exited():
+func _on_left_mouse_exited() -> void:
 	changes_to_cam_x = 0
-func _on_down_mouse_exited():
+func _on_down_mouse_exited() -> void:
 	changes_to_cam_y = 0
 	changes_to_cam_z = 0
